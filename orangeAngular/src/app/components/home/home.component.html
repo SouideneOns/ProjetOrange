@@ -1,0 +1,15 @@
+<app-header-home></app-header-home>
+
+ <div class="content" *ngIf="isLoggedIn; else loggedOut">
+  <div class="slider">
+    <div class="load"></div>
+    <div class="content">
+      <div class="container">
+
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

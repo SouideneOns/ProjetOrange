@@ -1,0 +1,377 @@
+<app-header-create></app-header-create>
+<div [hidden]="submitted" style="width: 400px;"></div>
+
+<!-- /////////////////// Start Stepper /////////////////////////////-->
+
+<mat-horizontal-stepper  class="stepper" [linear]="true" *ngIf="isLoggedIn; else loggedOut">
+
+                        <!-- *********** Step (1) **************** -->
+
+  <mat-step label="Personal Informations" state="person">
+
+    <div  class="jumbotron" style="width: 100%; height: 420px;">
+
+      <div class="tag"><span style="position:relative;top:5px;left: 5px;">Personal Informations</span></div>
+
+      <div class="form" style="position: relative; left: 50px;">
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control is-in" id="firstName" name="firstName"
+                     #firstname="ngModel" required [(ngModel)]="customer.firstName"
+                     maxlength="32" [ngClass]="{'is-invalid' :  firstname.invalid}">
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3" >
+            <div class="form-group" style="position: relative; left: 29px;">
+              <label for="lastName" >Last Name</label>
+              <input type="text" class="form-control" id="lastName" name="lastName"
+                     #lastName="ngModel" required [(ngModel)]="customer.lastName"  maxlength="32"
+                      [ngClass]="{'is-invalid' : lastName.invalid}">
+            </div>
+          </div>
+
+          <div class="form-group" style=" position:relative;top: 37px; left: 35px;" >
+            <div class="form-check form-check-inline" >
+              <input class="form-check-input" type="radio" name="gender" id="gender" value="MALE"
+                     required [(ngModel)]="customer.gender" #gender="ngModel"
+                     [ngClass]="{'is-invalid' : gender.invalid}">
+              <label class="form-check-label" for="gender">MALE</label>
+            </div>
+
+            <div class="form-check form-check-inline" >
+              <input class="form-check-input" type="radio" name="gender" id="gender" value="FEEMALE"
+                     required [(ngModel)]="customer.gender"  #gender="ngModel"
+                     [ngClass]="{'is-invalid' : gender.invalid}">
+              <label class="form-check-label" for="gender">FEMALE</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="date_birth">Date of Birth</label>
+              <input type="date" class="form-control" id="date_birth" required [(ngModel)]="customer.date_birth"
+               name="date_birth"  #date_birth="ngModel" [ngClass]="{'is-invalid' : date_birth.invalid}">
+            </div>
+          </div>
+
+          <label for="date_birth" style="position: relative; top:35px; left: 10px;"> à </label>
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="place_birth"></label>
+              <input style="position: relative; top: 10px; left: 19px;" type="text" class="form-control" id="place_birth"
+                     required [(ngModel)]="customer.place_birth"  name="place_birth" #place_birth="ngModel"
+                     [ngClass]="{'is-invalid' : place_birth.invalid}">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" required [(ngModel)]="customer.address"
+               name="address"pattern="[a-zA-Z][a-zA-Z]+" #address="ngModel"
+                     [ngClass]="{'is-invalid' : address.invalid}">
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group" style="position: relative; left: 29px;">
+              <label for="nationality">Nationality</label>
+                <select class="custom-select" class="form-control"
+                        #nationality="ngModel" [ngClass]="{'is-invalid' : nationality.invalid}" id="nationality"
+                        required [(ngModel)]="customer.nationality" name="nationality">
+                          <option value="">choose ...</option>
+                          <option value="Tunisian">Tunisian</option>
+                          <option value="option Two">option Two</option>
+                          <option value="option Three">option Three</option>
+                </select>
+            </div>
+           </div>
+
+        </div>
+
+        <button mat-raised-button color="primary" matStepperNext style="float: right; right: 50px; width: 75px;"  >Next</button>
+        <button (click)="Cancel()" mat-raised-button >Cancel</button>
+
+      </div>
+
+    </div>
+
+  </mat-step>
+
+                            <!-- *********** Step (2) **************** -->
+
+  <mat-step label="Account Informations" state="account">
+
+    <div  class="jumbotron" style="width: 100%; height: 420px;">
+
+      <div class="tag"><span style="position:relative;top:5px;left: 5px;">Account Informations</span></div>
+
+      <div class="form" style="position: relative; left: 50px;">
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <label for="identity">Identity</label>
+            <div class="form-group">
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="identity" id="identity" value="CIN"
+                       required [(ngModel)]="customer.identity"  #identity="ngModel"
+                       [ngClass]="{'is-invalid' : identity.invalid}">
+                <label class="form-check-label" for="identity">CIN</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="identity" id="identity" value="Passport"
+                       required [(ngModel)]="customer.identity"  #identity="ngModel"
+                       [ngClass]="{'is-invalid' : identity.invalid}">
+                <label class="form-check-label" for="identity">Passport</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group" style="position: relative; top: 17px; left: 32px;" >
+              <input type="text" class="form-control is-in" id="numIdentity"  name="numIdentity"
+                     required [(ngModel)]="customer.numIdentity" minlength="8" #numIdentity="ngModel"
+                     [ngClass]="{'is-invalid' :  numIdentity.invalid}" placeholder="N°">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="custCode">Customer Code</label>
+              <input type="text" class="form-control is-in" id="custCode" required [(ngModel)]="customer.custCode"
+               name="custCode" minlength="10" #custCode="ngModel"
+                     [ngClass]="{'is-invalid' :  custCode.invalid}">
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group" style="position: relative; left: 32px;">
+              <label for="creationDate">Creation Date</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="creationDate">Today is :</span>
+                </div>
+                <input type="text" class="form-control is-in" id="creationDate" name="creationDate"
+                       required [(ngModel)]="customer.creationDate"
+                       #creationDate="ngModel" [ngClass]="{'is-invalid' :  creationDate.invalid}">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group">
+              <label for="contact">Contact</label>
+              <input type="text" class="form-control is-in" id="contact" name="contact"
+                     required [(ngModel)]="customer.contact"
+                     pattern="[0-9][0-9]+" #contact="ngModel"
+                     [ngClass]="{'is-invalid' :  contact.invalid}">
+            </div>
+          </div>
+
+          <label  style="position: relative; top:33px; left: 10px;"> Or </label>
+
+          <div class="col-md-4 mb-3">
+            <div class="form-group" style="position: relative; left: 19px;">
+              <label for="email">Email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="email">@</span>
+                  </div>
+                  <input type="text" class="form-control is-in"  id="email" required [(ngModel)]="customer.email"
+                  name="email" pattern="[A-Za-zA-Z][A-Za-zA-Z]+.+@gmail.com" #email="ngModel"
+                       placeholder="xxxxx@xxxx.xxx" [ngClass]="{'is-invalid' :  email.invalid}">
+                </div>
+              </div>
+          </div>
+
+        </div>
+
+        <div style="position:relative;top: 15px;">
+          <button mat-raised-button matStepperPrevious style="width: 75px;">Back</button>
+          <button mat-raised-button color="primary" matStepperNext  style="float: right;right: 50px;width: 75px; " >Next</button>
+          <button (click)="Cancel()" mat-raised-button style="left: 10px; " >Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </mat-step>
+
+                               <!-- *********** Step (3) **************** -->
+
+  <mat-step label="Confirmation"  state="done" *ngIf="firstname.valid && lastName.valid && gender.valid
+  && date_birth.valid && place_birth.valid && address.valid && nationality.valid && custCode.valid &&
+  identity.valid && numIdentity.valid && contact.valid && email.valid && creationDate.valid">
+
+     <div  class="jumbotron"  style="width: 100%; height: 370px; background-color: #f2f2f2;">
+
+      <div class="tag"><span style="position:relative;top:5px;left: 5px; ">Confirmation</span></div>
+
+      <div class="form" style="position:relative;top: -45px;">
+
+        <div class="form-row">
+
+          <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>FirstName :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="firstName" name="firstName" readonly
+                     required [(ngModel)]="customer.firstName" >
+           </div>
+
+
+
+           <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>LastName :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="lastName" name="lastName" readonly
+                     required [(ngModel)]="customer.lastName" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Gender :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="gender" name="gender" readonly
+                     required [(ngModel)]="customer.gender" >
+           </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Date of Birth :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="date_birth" name="date_birth" readonly
+                     required [(ngModel)]="customer.date_birth" >
+           </div>
+
+          <div class="input-group-prepend" style="background-color: transparent; position: relative; left: -15px;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Place of Birth :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="place_birth" name="place_birth" readonly
+                     required [(ngModel)]="customer.place_birth" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent; position: relative; left: -38px;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Address :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="address" name="address" readonly
+                     required [(ngModel)]="customer.address" >
+           </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Nationality :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="nationality" name="nationality" readonly
+                     required [(ngModel)]="customer.nationality" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Identity :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="identity" name="identity" readonly
+                     required [(ngModel)]="customer.identity" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent;position: relative; left: 18px;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>N° :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="numIdentity" name="numIdentity" readonly
+                     required [(ngModel)]="customer.numIdentity" >
+           </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Customer Code :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="custCode" name="custCode" readonly
+                     required [(ngModel)]="customer.custCode" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent; position: relative; left: -36px;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Creation Date :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="creationDate" name="creationDate" readonly
+                     required [(ngModel)]="customer.creationDate" >
+           </div>
+
+           <div class="input-group-prepend" style="background-color: transparent; position: relative; left: -60px;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Contact :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent" type="text" class="form-control is-in" id="contact" name="contact" readonly
+                     required [(ngModel)]="customer.contact" >
+           </div>
+
+        </div>
+
+        <div class="form-row">
+
+
+          <div class="input-group-prepend" style="background-color: transparent;">
+            <span style="background-color: transparent; border:1px solid transparent" class="input-group-text" ><strong>Email :</strong></span>
+              <input style="background-color: transparent; border:1px solid transparent; width: 320px;" type="text" class="form-control is-in" id="email" name="email" readonly
+                     required [(ngModel)]="customer.email" >
+           </div>
+
+          <mat-checkbox value="checked" (click)="changeValue(checked)" color="primary"
+          style=" position: relative; top: 82px; left:190px">
+            Confirm all the informations
+         </mat-checkbox>
+
+          <div style="height: 10px; position: relative; top: 156px; left: 250px;">
+            <button *ngIf="checked==true" (click)="onSubmit()" type="submit" mat-raised-button class="btn">Submit</button>
+            <button (click)="Cancel()"  mat-raised-button class="btn2">Cancel</button>
+
+          </div>
+
+        </div>
+
+        <button mat-raised-button matStepperPrevious style="float: left; position: relative; top: 40px;">Back</button>
+
+       </div>
+
+    </div>
+
+  </mat-step>
+
+  <!-- Icon overrides. -->
+
+  <ng-template matStepperIcon="person">
+    <mat-icon>person_pin</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="account">
+    <mat-icon>admin_panel_settings</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="done">
+    <mat-icon>done</mat-icon>
+  </ng-template>
+
+</mat-horizontal-stepper>
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+
+

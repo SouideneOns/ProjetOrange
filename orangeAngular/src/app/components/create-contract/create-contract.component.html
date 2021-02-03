@@ -1,0 +1,348 @@
+<app-header-create-contract></app-header-create-contract>
+
+<div [hidden]="submitted" style="width: 400;"></div>
+
+<mat-horizontal-stepper class="stepper" [linear]="true" *ngIf="isLoggedIn; else loggedOut">
+
+  <!--////////////////Step1///////////////////////////-->
+
+  <mat-step label="Contract Informations" state="fact_check">
+
+    <div  class="jumbotron" style="width: 100%; height: 350px;">
+      <div class="tag"><span style="position:relative; top:5px; left: 5px;">Contract Informations</span></div>
+
+      <div class="form">
+      <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <div class="form-group" style="position: relative; left: 50px;">
+          <label for="creation_date">Creation Date</label>
+           <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="creationDate">Today is :</span>
+           </div>
+      <input type="text" class="form-control is-in" id="creation_date" required [(ngModel)]="contract.creation_date" name="creation_date" #creation_date="ngModel"
+      [ngClass]="{'is-invalid' :  creation_date.invalid}">
+   </div>
+  </div>
+  </div>
+    <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative; left: 128px;">
+        <label for="num_seq">Status</label>
+        <select class="custom-select" class="form-control"
+        #status="ngModel" [ngClass]="{'is-invalid' : status.invalid}" id="status" required [(ngModel)]="contract.status" name="status">
+
+          <option value="active">active</option>
+          <option value="disabled">disabled</option>
+          <option value="suspended">suspended</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row" style="position: relative; top: 20px; left: 50px;">
+
+      <div class="col-md-4 mb-3">
+        <div class="form-group">
+          <label for="coCode">Contract Code</label>
+          <input type="text" class="form-control is-in" id="coCode" required [(ngModel)]="contract.coCode"
+            name="coCode" pattern="[1-9][1-9]+" #coCode="ngModel"
+            [ngClass]="{'is-invalid' :  coCode.invalid}">
+          <!--<div *ngIf="firstname.invalid" class="invalid-input">
+          <div *ngIf="firstname.errors?.required">Firstname is not Valid</div>
+        </div>!-->
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3" >
+        <div class="form-group" style="position: relative; left: 80px;">
+          <label for="customerID" >customer</label>
+          <select class="custom-select" class="form-control"
+          #customerID="ngModel" [ngClass]="{'is-invalid' : customerID.invalid}" id="customerID" required [(ngModel)]="contract.customerID" name="customerID">
+          <option *ngFor="let customer of customers " value="{{customer.firstName}}">{{customer.firstName}}</option>
+          </select>
+        </div>
+      </div>
+
+    <div style="position:relative;top: 60px;">
+      <button mat-raised-button class="btn" matStepperNext  style="float: right; background-color: #0000FF; top: 50px; left: 106px;" >Next</button>
+      <button (click)="Cancel()" mat-raised-button style="right:620px; top: 50px; background-color: white;" >Cancel</button>
+    </div>
+    </div>
+</div>
+ </div>
+</mat-step>
+
+<!--////////////////Step2///////////////////////////-->
+
+<mat-step label="Contract Specifications" state="list">
+  <div  class="jumbotron" style="width: 100%; height: 330px;">
+    <div class="tag"><span style="position:relative; top:5px; left: 5px;">Contract Informations</span></div>
+
+    <div class="form">
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <div class="form-group" style="position: relative; left: 50px;">
+            <label for="simID">N° SIM</label>
+             <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="simID">+217 :</span>
+             </div>
+        <input type="text" class="form-control is-in" id="simID" required [(ngModel)]="contract.simID" name="simID" #simID="ngModel"
+        pattern="[1-9]{8}"  [ngClass]="{'is-invalid' :  simID.invalid}">
+     </div>
+    </div>
+    </div>
+
+      <div class="col-md-4 mb-3">
+        <div class="form-group" style="position: relative; left: 128px;">
+          <label for="num_seq">Sequence Number </label>
+          <input type="text" class="form-control is-in" id="num_seq" minlength="8"  required [(ngModel)]="contract.num_seq"
+            name="num_seq" pattern="[1-9][1-9]+" #num_seq="ngModel"
+            [ngClass]="{'is-invalid' :  num_seq.invalid}">
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+
+      <div class="col-md-4 mb-3">
+        <div class="form-group" style="position: relative; left: 50px; top: 20px;">
+          <label for="marketID">Maket</label>
+          <select class="custom-select" class="form-control"
+          #marketID="ngModel" [ngClass]="{'is-invalid' : marketID.invalid}" id="marketID" required [(ngModel)]="contract.marketID" name="marketID">
+          <option  *ngFor="let market of markets " value="{{market.marketName}}">{{market.marketName}}</option>
+          </select>
+
+   </div>
+  </div>
+
+
+<div class="col-md-4 mb-3" >
+  <div class="form-group" style="position: relative; left: 130px; top: 20px;">
+    <label for="offerID">Offers</label>
+    <select class="custom-select" class="form-control"
+    #offerID="ngModel" [ngClass]="{'is-invalid' : offerID.invalid}" id="offerID"
+    required [(ngModel)]="contract.offerID" name="offerID">
+
+    <ng-container *ngIf="contract.marketID=='GSM'">
+      <option *ngFor="let offerg of offersg " value="{{offerg.offerName}}">{{offerg.offerName}}</option>
+    </ng-container>
+
+    <ng-container *ngIf="contract.marketID=='MOBILE'">
+      <option *ngFor="let offerm of offersm " value="{{offerm.offerName}}">{{offerm.offerName}}</option>
+    </ng-container>
+
+    <ng-container *ngIf="contract.marketID=='FIX'">
+      <option *ngFor="let offerf of offersf " value="{{offerf.offerName}}">{{offerf.offerName}}</option>
+    </ng-container>
+    </select>
+</div>
+</div>
+
+</div>
+
+      <div>
+        <button mat-raised-button  matStepperPrevious style="top: 20px; background-color: white;">Back</button>
+        <button mat-raised-button class="btn" matStepperNext  style="float: right; background-color: #0000FF; top: 20px; " >Next</button>
+      <button (click)="Cancel()" mat-raised-button style="top: 20px;background-color: white; left: 10px;" >Cancel</button>
+      </div>
+      </div>
+      </div>
+    </mat-step>
+
+<!--////////////////////////////step3////////////////////////////////////-->
+
+
+<mat-step label="Confirmation"  state="done" *ngIf="creation_date.valid && status.valid && coCode.valid && customerID.valid
+&& simID.valid && num_seq.valid && marketID.valid && offerID.valid ">
+  <div  class="jumbotron" style="width: 100%; height: 420px;">
+
+
+    <div class="tag"><span style="position:relative;top:5px;left: 5px; ">Confirmation</span></div>
+
+      <div class="form" style="position:relative;top: -20px;">
+
+
+     <div class="form-row" style="position: relative; left: 70px;">
+       <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative; left: 20px; width: 300px;">
+        <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="creationDate"
+          style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Creation Date :</span>
+       </div>
+        <input type="text" class="form-control is-in" id="creation_date" required [(ngModel)]="contract.creation_date"
+          name="creation_date" readonly style="text-align: center;">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 mb-3" >
+      <div class="form-group" style="position: relative; left: 75px;">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="status"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Status :</span>
+         </div>
+        <input type="text" class="form-control" id="status" required [(ngModel)]="contract.status"
+        name="status" readonly style="text-align: center;">
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="form-row" style="position: relative; left: 40px;">
+
+    <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative; left: 50px; width: 300px;">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="coCode"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Contract Code:</span>
+         </div>
+        <input type="text" class="form-control" id="coCode"
+        required [(ngModel)]="contract.coCode" name="coCode" readonly style="text-align: center;">
+      </div>
+      </div>
+    </div>
+
+      <div class="col-md-4 mb-3" style="position: relative; left: 65px;">
+        <div class="form-group" style="position: relative; left: 40px; width: 300px;">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="customerID"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Customer Code :</span>
+         </div>
+        <input type="text" class="form-control" id="customerID" required [(ngModel)]="contract.customerID"
+        name="customerID" readonly style="text-align: center;">
+      </div>
+
+    </div>
+
+  </div>
+  </div>
+
+  <div class="form-row" style="position: relative; left: 70px;">
+
+
+    <div class="col-md-4 mb-3">
+      <div class="form-group">
+        <div class="input-group" style="position: relative; width: 300px; left: 20px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="simID"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">SIM:</span>
+         </div>
+        <input type="text" class="form-control" id="simID" required [(ngModel)]="contract.simID"
+        name="simID" readonly style="text-align: center;">
+      </div>
+      </div>
+
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative;">
+        <div class="input-group" style="position: relative; left: 75px; width: 300px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="simID"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Num_seq:</span>
+         </div>
+        <input type="text" class="form-control" id="num_seq" required [(ngModel)]="contract.num_seq"
+        name="num_seq" readonly style="text-align: center;">
+      </div>
+      </div>
+      </div>
+  </div>
+
+
+  <div class="form-row" style="position: relative; left: 10px;">
+    <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative;">
+        <div class="input-group" style="position: relative; left: 79px; width: 300px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="marketID"
+            style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Market:</span>
+         </div>
+        <input type="text" class="form-control is-in" id="marketID" required [(ngModel)]="contract.marketID"
+          name="marketID" readonly style="text-align: center;">
+   </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="form-group" style="position: relative;">
+      <div class="input-group" style="position: relative; left: 135px; width: 300px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="offerID"
+          style="text-orientation: initial;background-color: whitesmoke;
+          font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;
+          font-weight: bold;">Offer:</span>
+       </div>
+        <input type="text" class="form-control is-in" id="offerID" required [(ngModel)]="contract.offerID"
+          name="offerID" readonly style="text-align: center;">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-checkbox value="checked" (click)="changeValue(checked)" color="primary"
+  style=" position: relative; top: 19px; float: right; right:130px">
+    Confirm all the informations
+ </mat-checkbox>
+
+  <div style="height: 10px; position: relative;  left: -50px;">
+    <button *ngIf="checked==true" (click)="onSubmit()" type="submit" mat-raised-button class="btn"
+    style="position: relative; top: 10px; left: 230px;">Submit</button>
+
+    <button (click)="Cancel()"  mat-raised-button class="btn2"
+    style="position: relative; top:12px; float: left;left: 30px;">Cancel</button>
+
+  </div>
+<button mat-raised-button matStepperPrevious class="btn2" style="float: left; position: relative;top: 2px;">Back</button>
+
+</div>
+
+</div>
+</mat-step>
+
+
+<!-- Icon overrides. -->
+<ng-template matStepperIcon="fact_check">
+  <mat-icon>fact_check</mat-icon>
+</ng-template>
+
+<ng-template matStepperIcon="list">
+  <mat-icon>list</mat-icon>
+</ng-template>
+
+<ng-template matStepperIcon="done">
+  <mat-icon>done</mat-icon>
+</ng-template>
+
+</mat-horizontal-stepper>
+
+<ng-template #loggedOut>
+Please login.
+</ng-template>
+
+<script>
+
+</script>
+
+

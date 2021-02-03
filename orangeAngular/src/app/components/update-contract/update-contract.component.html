@@ -1,0 +1,136 @@
+<app-header></app-header>
+
+<div class="content">
+  <div class="slider">
+    <div class="load"></div>
+    <div class="content">
+      <div class="container">
+
+        <h1 style="color: black;position: relative; top: 140px; left:100px; font-weight: 500;">
+            Update Information</h1>
+        <button mat-raised-button (click)="gotoList()"
+        style="position:relative; float: right; right: 220px; top: 90px;">Back to Contract List
+    </button><br>
+
+<div style="width: 42%; height: 6px; position: relative; top: 120px;
+left: 100px; background-color: black;">
+</div>
+
+<div style="width: 42%; height: 6px; position: relative; top: 114px;
+left: 540px; background-color: #ff6600;">
+</div>
+
+
+<button style="position:relative; top: 108px; left:100px;background-color: black; color: white;
+height: 30px; border: transparent; font-weight: 300;">Contract Informations</button>
+
+<button style="position:relative; top: 108px; left:390px;background-color: #ff6600; color: white;
+height: 30px; border: transparent; font-weight: 300;">Contract Informations</button>
+
+<div style="width: 400px; position: relative; top: 140px;">
+  <form (ngSubmit)="onSubmit()" style="max-height: 30px;">
+
+    <div class="personnal" >
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Contract Code</strong></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="coCode" required [(ngModel)]="contract.coCode"
+        name="coCode">
+      </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Crée_le</strong></label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="creation_date" required [(ngModel)]="contract.creation_date"
+      name="creation_date" readonly>
+    </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Status</strong></label>
+      <div class="col-sm-10">
+        <select class="custom-select" class="form-control"
+        #status="ngModel" [ngClass]="{'is-invalid' : status.invalid}" id="status" required [(ngModel)]="contract.status" name="status">
+
+          <option value="active">active</option>
+          <option value="disabled">disabled</option>
+          <option value="suspended">suspended</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Customer</strong></label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="customerID" required [(ngModel)]="contract.customerID"
+      name="customerID" readonly>
+    </div>
+  </div>
+
+</div>
+
+<div class="account" style="top: -235px; position: relative; left: 540px;">
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Sequency Number</strong></label>
+    <div class="col-sm-10">
+    <input type="text" class="form-control" id="num_seq" required [(ngModel)]="contract.num_seq"
+    name="num_seq">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>N°SIM</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="simID" required [(ngModel)]="contract.simID"
+      name="simID">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Market</strong></label>
+    <div class="col-sm-10">
+        <select class="custom-select" class="form-control"
+        #marketID="ngModel" [ngClass]="{'is-invalid' : marketID.invalid}"
+        id="marketID" required [(ngModel)]="contract.marketID" name="marketID">
+        <option *ngFor="let market of markets " value="{{market.marketName}}">{{market.marketName}}
+        </option>
+        </select>
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Offers</strong></label>
+    <div class="col-sm-10">
+      <select class="custom-select" class="form-control"
+      #offerID="ngModel" [ngClass]="{'is-invalid' : offerID.invalid}" id="offerID"
+      required [(ngModel)]="contract.offerID" name="offerID">
+
+      <ng-container *ngIf="contract.marketID=='GSM'">
+        <option *ngFor="let offerg of offersg " value="{{offerg.offerName}}">{{offerg.offerName}}</option>
+      </ng-container>
+
+      <ng-container *ngIf="contract.marketID=='MOBILE'">
+        <option *ngFor="let offerm of offersm " value="{{offerm.offerName}}">{{offerm.offerName}}</option>
+      </ng-container>
+
+      <ng-container *ngIf="contract.marketID=='FIX'">
+        <option *ngFor="let offerf of offersf " value="{{offerf.offerName}}">{{offerf.offerName}}</option>
+      </ng-container>
+      </select>
+    </div>
+  </div>
+
+
+    <button type="submit" class="btn btn-success" style="position: relative; left: 380px; top: -345px;">Submit</button>
+  </div>
+  </form>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

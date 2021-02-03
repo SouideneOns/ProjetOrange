@@ -1,0 +1,71 @@
+<app-header></app-header>
+
+<div class="content">
+  <div class="slider">
+    <div class="load"></div>
+    <div class="content">
+      <div class="container">
+
+        <h1 style="color: black;position: relative; top: 180px; left:100px; font-weight: 500;">Contract Details</h1>
+
+<div style="width: 50%; height: 6px; position: relative; top: 180px;
+left: 100px; background-color: black;">
+</div>
+
+<div style="width: 50%; height: 6px; position: relative; top: 174px;
+left: 580px; background-color: #ff6600;">
+</div>
+
+<button style="position:relative; top: 170px; left:100px;background-color: black; color: white;
+height: 50px; border: transparent; font-weight: 300;">Contract Information</button>
+
+<button style="position:relative; top: 170px; left:440px;background-color: #ff6600; color: white;
+height: 50px; border: transparent; font-weight: 300;">Contract Information</button>
+
+
+<div *ngIf="contract" style="position:relative; top: 200px; left:100px; font-size: 18px; ">
+
+  <div style="margin-bottom: 8px;">
+    <label><b>Creation Date : </b></label> {{contract.creation_date}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Contract Code : </b></label> {{contract.coCode}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Status : </b></label> {{contract.status}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Customer : </b></label> {{contract.customerID}}
+  </div>
+
+</div>
+
+
+<div *ngIf="contract" style="position:relative;top: 50px;left:600px; font-size: 18px; max-width: 30%;max-height: 50px;">
+
+  <div style="margin-bottom: 8px;">
+    <label><b>Sequency Number : </b></label> {{contract.num_seq}}
+  </div>
+
+  <div style="margin-bottom: 8px;">
+    <label><b>N° SIM : </b></label> {{contract.simID}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Market : </b></label> {{contract.marketID}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Offer : </b></label> {{contract.offerID}}
+  </div>
+
+
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button (click)="list()" style="position:relative; left: 180px;top:-60px" class="btn">Back to Contract List</button><br>
+</div>
+
+

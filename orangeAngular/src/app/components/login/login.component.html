@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+    <div class="slider">
+      <div class="load"></div>
+      <div class="content"></div>
+    </div>
+
+    <div class="container">
+        <div class="loginBox">
+          <a href="/front"><img src="assets/img/close.png" class="close"></a>
+          <img class="user" src="assets/img/user.png">
+
+            <div class="inputBox">
+              <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
+              <span><i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div class="inputBox">
+              <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+              <span><i class="fa fa-lock" aria-hidden="true"></i>
+              </span>
+            </div>
+            <button (click)=checkLogin() class="bg"> Login </button>
+        </div>
+    </div>
+
+

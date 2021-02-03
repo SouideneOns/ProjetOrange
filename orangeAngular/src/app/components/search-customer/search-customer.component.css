@@ -1,0 +1,34 @@
+.tag{
+  position :relative;
+  top: -65px;
+  left: -32px;
+  width: 1110px;
+  height: 30px;
+  background-color: #ff6600;
+  font-size: 18px;font-weight: 700;
+  color: white;
+}
+
+.tag2{
+  position :relative;
+  top: -15px;
+
+  width: 1110px;
+  height: 30px;
+  background-color: #ff6600;
+  font-size: 18px;font-weight: 700;
+  color: white;
+}
+
+.highlight {
+  color: white;
+
+}
+
+.notHighlight {
+  color: black;
+  background: white;
+
+}
+
+

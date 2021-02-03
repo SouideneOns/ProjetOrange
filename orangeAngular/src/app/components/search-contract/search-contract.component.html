@@ -1,0 +1,110 @@
+<app-header-search-contract></app-header-search-contract>
+<div class="container" style=" position: relative; top: 85px; left: 4%; width: 80%;"
+    *ngIf="isLoggedIn; else loggedOut">
+ <div  class="jumbotron" style="width: 100%; height: 20px;">
+
+    <div class="tag"><span style="position:relative;top:5px;left: 5px;">Search for Contract</span></div>
+
+  <button onclick="location.href = '/createContract';" mat-raised-button style="position: relative; top: -42px;">
+    <mat-icon>add</mat-icon>Create</button>
+
+ <mat-form-field class="search-form-field" style="position: relative; top: -40px; left: 15px;
+    width: 20%;">
+    <input matInput [(ngModel)]="coCode" placeholder="Search By ContractCode" autocomplete="off"
+    (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"
+    (click)="onSearchClear1()"><mat-icon>close</mat-icon></button>
+ </mat-form-field>
+
+ <mat-form-field class="search-form-field2" style="position: relative; top: -40px;left: 30px;
+ width: 20%;">
+    <input matInput [(ngModel)]="status" placeholder="Search By Status" autocomplete="off"
+    (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"
+    (click)="onSearchClear2()"><mat-icon>close</mat-icon></button>
+  </mat-form-field>
+
+  <mat-form-field class="search-form-field2" style="position: relative; top: -40px;left: 40px;
+  width: 20%;">
+    <input matInput [(ngModel)]="simID" placeholder="Search By SIM" autocomplete="off"
+    (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"
+    (click)="onSearchClear3()"><mat-icon>close</mat-icon></button>
+  </mat-form-field>
+
+  <mat-form-field class="search-form-field2" style="position: relative; top: -40px;left: 50px;
+  width:20%;">
+    <input matInput [(ngModel)]="customerID" placeholder="Search By Customer" autocomplete="off"
+    (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"
+    (click)="onSearchClear4()"><mat-icon>close</mat-icon></button>
+  </mat-form-field>
+   </div>
+
+
+<div class="mat-elevation-z8" style="position:relative;top: -20px;">
+    <mat-table [dataSource]="listData"matSort >
+
+        <ng-container matColumnDef="coCode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>ContractCode</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.coCode}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customerID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.customerID}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="simID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>SIM</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.simID}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="marketID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Market</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.marketID}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="offerID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Offer</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.offerID}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+            <mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="updateContract(row.id)"  color="warn"><mat-icon>create</mat-icon></button>
+              <button mat-icon-button (click)="detailsContract(row.id)"><mat-icon>read_more</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">Loading data ...</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">No data ...</mat-footer-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" style="height: 0px;" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 0px;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData!=null && listData.length==0)}"></mat-footer-row>
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 5]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+</div>
+</div>
+
+<ng-template #loggedOut>
+    Please login.
+</ng-template>

@@ -1,0 +1,47 @@
+.btn {
+
+  background-color: #009933; /* Green*/
+  color: white;
+  float: right;
+  position: relative;
+  left: 10px;
+  top: -5px;
+}
+
+.btn:hover {
+  background-color: #003311; /* Green*/
+}
+
+.btn2 {
+
+  float: right;
+  position: relative;
+  left: -10px;
+  top: -80px;
+}
+
+.invalid-input{
+color: red;
+}
+
+.stepper{
+  width: 70%;
+  position: relative;
+  background-color: transparent;
+  top: 70px;
+  left: 18%;
+}
+.tag{
+  position :relative;
+  top: -65px;
+  left: -32px;
+  width: 908px;
+  height: 30px;
+  background-color: #ff6600;
+  font-size: 18px;font-weight: 700;
+  color: white;
+}
+.form{
+  position: relative;
+  top: -30px;
+}

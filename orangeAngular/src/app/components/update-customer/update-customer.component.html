@@ -1,0 +1,133 @@
+<app-header></app-header>
+<div [hidden]="submitted" style="width: 400px;"></div>
+<div class="content">
+  <div class="slider">
+    <div class="load"></div>
+    <div class="content">
+      <div class="container">
+
+        <h1 style="color: black;position: relative; top: 130px; left:100px; font-weight: 500;">Update Information</h1>
+        <button mat-raised-button (click)="gotoList()" style="position:relative; float: right; right: 220px; top: 90px;">Back to Employee List</button><br>
+<div style="width: 42%; height: 6px; position: relative; top: 120px;
+left: 100px; background-color: black;">
+</div>
+
+<div style="width: 42%; height: 6px; position: relative; top: 114px;
+left: 540px; background-color: #ff6600;">
+</div>
+
+
+<button style="position:relative; top: 108px; left:100px;background-color: black; color: white;
+height: 30px; border: transparent; font-weight: 300;">Personal Information</button>
+
+<button style="position:relative; top: 108px; left:399px;background-color: #ff6600; color: white;
+height: 30px; border: transparent; font-weight: 300;">Account Information</button>
+
+<div style="width: 400px; position: relative; top: 140px;">
+  <form (ngSubmit)="onSubmit()" style="max-height: 30px;">
+
+    <div class="personnal" >
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Firstname</strong></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstName" required [(ngModel)]="customer.firstName" name="firstName" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Lastname</strong></label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="customer.lastName" name="lastName" readonly>
+    </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Gender</strong></label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="gender" required [(ngModel)]="customer.gender"  name="gender" readonly>
+    </div>
+    </div>
+
+    <div class="form-group row" style="position: relative; left: 100px;">
+      <label for="name" class="col-sm-2 col-form-label" ><strong>Date_Birth</strong></label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="date_birth" required [(ngModel)]="customer.date_birth" name="date_birth" readonly>
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 100px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Place_Birth</strong></label>
+    <div class="col-sm-10">
+    <input type="text" class="form-control" id="place_birth" required [(ngModel)]="customer.place_birth"  name="place_birth" readonly>
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 100px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Address</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="address" required [(ngModel)]="customer.address" name="address">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 100px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Nationality</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="nationality" required [(ngModel)]="customer.nationality" name="nationality" readonly>
+    </div>
+  </div>
+</div>
+
+<div class="account" style="top: -380px; position: relative; left: 540px;">
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Identity</strong></label>
+    <div class="col-sm-10">
+    <input type="text" class="form-control" id="identity" required [(ngModel)]="customer.identity"  name="identity">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Num°</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="numIdentity" required [(ngModel)]="customer.numIdentity"  name="numIdentity">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Code</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="custCode" required [(ngModel)]="customer.custCode"  name="custCode" readonly>
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Crée_le</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="creationDate" required [(ngModel)]="customer.creationDate"  name="creationDate" readonly>
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Contact</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="contact" required [(ngModel)]="customer.contact"  name="contact">
+    </div>
+  </div>
+
+  <div class="form-group row" style="position: relative; left: 0px;">
+    <label for="name" class="col-sm-2 col-form-label" ><strong>Email</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" required [(ngModel)]="customer.email"  name="email">
+    </div>
+  </div>
+
+    <button type="submit" class="btn btn-success" style="position: relative; left: 380px; top: -435px;">Submit</button>
+  </div>
+  </form>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

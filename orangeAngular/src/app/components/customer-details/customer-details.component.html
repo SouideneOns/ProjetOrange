@@ -1,0 +1,95 @@
+<app-header></app-header>
+
+<div class="content">
+  <div class="slider">
+    <div class="load"></div>
+    <div class="content">
+      <div class="container">
+
+        <h1 style="color: black;position: relative; top: 180px; left:100px; font-weight: 500;">Customer Details</h1>
+
+<div style="width: 32%; height: 6px; position: relative; top: 180px;
+left: 100px; background-color: black;">
+</div>
+
+<div style="width: 32%; height: 6px; position: relative; top: 174px;
+left: 450px; background-color: #ff6600;">
+</div>
+
+<div style="width: 32%; height: 6px; position: relative; top: 168px;
+left: 800px; background-color: black">
+</div>
+
+<button style="position:relative; top: 165px; left:100px;background-color: black; color: white;
+height: 50px; border: transparent; font-weight: 300;">Personal Information</button>
+
+<button style="position:relative; top: 165px; left:309px;background-color: #ff6600; color: white;
+height: 50px; border: transparent; font-weight: 300;">Account Information</button>
+
+<button style="position:relative; top: 165px; left:521px;background-color: black; color: white;
+height: 50px; border: transparent; font-weight: 300;" (click)="findCustomer()">Find Contracts >> </button>
+ <input type="hidden"  name="firstName" [(ngModel)]="firstname"/>
+
+<div *ngIf="customer" style="position:relative; top: 200px; left:100px; font-size: 18px; ">
+
+  <div style="margin-bottom: 8px;">
+    <label><b>First Name : </b></label> {{customer.firstName}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Last Name : </b></label> {{customer.lastName}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Gender : </b></label> {{customer.gender}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Date of Birth : </b></label> {{customer.date_birth}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Place of Birth : </b></label> {{customer.place_birth}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Address : </b></label> {{customer.address}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Nationality : </b></label> {{customer.nationality}}
+  </div>
+
+</div>
+
+
+<div *ngIf="customer" style="position:relative; top: -53px; left:450px; font-size: 18px; max-width: 30%;max-height: 50px;">
+
+  <div style="margin-bottom: 8px;">
+    <label><b>Identity : </b></label> {{customer.identity}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>N° : </b></label> {{customer.numIdentity}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Customer Code : </b></label> {{customer.custCode}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Creation Date : </b></label> {{customer.creationDate}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Contact : </b></label> {{customer.contact}}
+  </div>
+  <div style="margin-bottom: 8px;">
+    <label><b>Email : </b></label> {{customer.email}}
+  </div>
+
+</div>
+
+<div *ngFor="let contract of listData2" style="position:relative; top: -110px; left:800px; font-size: 18px; max-width: 30%; max-height: 50px;">
+  <div>
+    <label><b>Contract Code : </b></label> {{contract.coCode}}
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button (click)="list()" style="position:relative; left: 180px;" class="btn">Back to Employee List</button><br>
+</div>
+
+

@@ -1,0 +1,155 @@
+<app-header-search></app-header-search>
+<div class="container" style=" position: relative; top: 85px; left: 2%; width: 90%;" *ngIf="isLoggedIn; else loggedOut">
+
+  <div  class="jumbotron" style="width: 100%; height: 20px;">
+    <div class="tag"><span style="position:relative;top:5px;left: 5px;">Search for Customer</span></div>
+    <button onclick="location.href = '/addCustomer';" mat-raised-button style="position: relative; top: -42px;"><mat-icon>add</mat-icon>Create</button>
+
+    <mat-form-field class="search-form-field" style="position: relative; top: -40px;">
+      <input matInput [(ngModel)]="firstname" placeholder="Search By Firstname" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="onSearchClear1()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+    <mat-form-field class="search-form-field2" style="position: relative; top: -40px;">
+      <input matInput [(ngModel)]="lastname" placeholder="Search By Lastname" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="onSearchClear2()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+
+    <mat-form-field class="search-form-field2" style="position: relative; top: -40px;">
+      <input matInput [(ngModel)]="numidentity" placeholder="Search By Numidentity" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="onSearchClear4()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+
+    <mat-form-field class="search-form-field2" style="position: relative; top: -40px;">
+      <input matInput [(ngModel)]="custcode" placeholder="Search By Custcode" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="onSearchClear3()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+
+  </div>
+
+
+
+
+
+  <div class="mat-elevation-z8" style="position:relative;top: -20px;">
+    <mat-table [dataSource]="listData"matSort >
+
+      <ng-container matColumnDef="first_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="last_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>LastName</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.gender}}</mat-cell>
+      </ng-container>
+<!--
+      <ng-container matColumnDef="nationality">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nationality</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.nationality}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date_birth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Birth</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.date_birth}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="place_birth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Place of Birth</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.place_birth}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.address}}</mat-cell>
+      </ng-container>!-->
+
+      <ng-container matColumnDef="identity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Identity</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.identity}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="num_identity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>N° Identity</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.numIdentity}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="custCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Customer Code</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.custCode}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="creation_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Creation Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.creationDate}}</mat-cell>
+      </ng-container>
+
+
+      <!--<ng-container matColumnDef="contact">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Contact</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.contact}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+      </ng-container>!-->
+
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="updateCustomer(row.id)" color="warn"><mat-icon>create</mat-icon></button>
+          <button mat-icon-button ><mat-icon></mat-icon></button>
+          <button mat-icon-button  (click)="customerDetails(row.id)"><mat-icon>read_more</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">Loading data ...</mat-footer-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">No data .</mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns" style="height: 0px;" ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 0px;"></mat-row>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData!=null && listData.length==0)}"></mat-footer-row>
+    </mat-table>
+  </div>
+
+  <div class="tag2"><span style="position:relative;top:5px;left: 5px;">Contracts</span></div>
+  <mat-table [dataSource]="listData2"matSort >
+
+
+    <ng-container matColumnDef="co_code">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let element"  [ngClass]="(element.isSeen) ? 'highlight' : 'notHighlight'">{{element.coCode}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="noContracts">
+      <mat-footer-cell *matFooterCellDef colspan="6">No Contracts .</mat-footer-cell>
+    </ng-container>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;" [ngClass]="(displayedColumns2) ? 'highlight' : 'notHighlight'"></mat-row>
+    <mat-footer-row *matFooterRowDef="['noContracts']" [ngClass]="{'hide2': !(listData2!=null && listData2.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[1, 2, 3, 5]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+
