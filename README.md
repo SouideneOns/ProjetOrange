@@ -5,6 +5,6 @@
 1/ Partie back-end
 2/ partie Front-end
 
-###  La partie backend est réalisée avec le Spring boot. Elle est manipulée avec les REST API pour effectuer le CRUD. Elle comporte aussi base de données qui est construite par le développeur backend. 
+  La partie backend est réalisée avec le Spring boot. Elle est manipulée avec les REST API pour effectuer le CRUD. Elle comporte aussi base de données qui est construite par le développeur backend. 
 
-###  La partie Frontend est développée avec Angular.
+  La partie Frontend est développée avec Angular.
