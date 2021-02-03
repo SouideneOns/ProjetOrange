@@ -1,7 +1,7 @@
 # ProjetOrange
 # Application web de la gestion des clients et des contrats
 
-## ce projet est composé de deux parties:
+## Ce projet est composé de deux parties:
 1/ Partie back-end
 2/ partie Front-end
 
